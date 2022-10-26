@@ -1,0 +1,5 @@
+.projectInformations{ width:40%;text-align: justify; }
+.projectImage{ width:fit-content;}
+.titulo a,.titulo a:visited{color: #000;}
+.titulo a:hover{text-decoration: underline;}
+.info ul li{display: inline;padding: 3%;}
