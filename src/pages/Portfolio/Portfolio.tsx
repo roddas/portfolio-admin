@@ -1,20 +1,116 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Menu } from '../../components/Menu/Menu';
 import { Footer } from '../../components/Footer/Footer';
 import './Portfolio.css';
-import { portfolioData } from '../../mocks/portfolio';
+import {
+    JSONResponseType,
+    EducationType,
+    LanguagesAndToolsType,
+    SoftSkillsType,
+    SoftEngHardSkillsType,
+    PentestHardSkillsType,
+    WorkXPType,
+    IdiomType,
+} from '../../shared/Types';
+import { REMOTE_URL } from '../../shared/constants';
 
 export const PortfolioPage: FC = () => {
-    const {
-        education,
-        languageToolsIcons,
-        hardSkillsProgramming,
-        hardSkillsCyberSec,
-        softSkills,
-        workExperience,
-        idioms,
-    } = portfolioData;
+    const [education, updateEducation] = useState<Array<EducationType>>();
+    const [languageTools, updateLanguageTools] =
+        useState<Array<LanguagesAndToolsType>>();
+    const [softSkillsData, updateSoftSkills] =
+        useState<Array<SoftSkillsType>>();
+    const [softEngHardSkills, updateSoftEngHardSkills] =
+        useState<Array<SoftEngHardSkillsType>>();
+    const [pentestHardSkills, updatePentestHardSkills] =
+        useState<Array<PentestHardSkillsType>>();
+    const [workXP, updateWorkXP] = useState<Array<WorkXPType>>();
+    const [idiom, updateIdiom] = useState<Array<IdiomType>>();
 
+    useEffect(() => {
+        (async () => {
+            try {
+                // GET /education
+                const educationRequest = (await (
+                    await fetch(REMOTE_URL + '/education')
+                ).json()) as JSONResponseType;
+
+                if (Number(educationRequest.statusCode) !== 200) {
+                    console.error(educationRequest.statusCode);
+                } else {
+                    updateEducation([...educationRequest.data]);
+                }
+
+                // GET /languagestools
+                const languageToolsRequest = (await (
+                    await fetch(REMOTE_URL + '/languagestools')
+                ).json()) as JSONResponseType;
+
+                if (Number(languageToolsRequest.statusCode) !== 200) {
+                    console.error(languageToolsRequest.statusCode);
+                } else {
+                    updateLanguageTools([...educationRequest.data]);
+                }
+
+                // GET /softskills
+                const softSkillsRequest = (await (
+                    await fetch(REMOTE_URL + '/softskills')
+                ).json()) as JSONResponseType;
+
+                if (Number(softSkillsRequest.statusCode) !== 200) {
+                    console.error(softSkillsRequest.statusCode);
+                } else {
+                    updateSoftSkills([...softSkillsRequest.data]);
+                }
+
+                // GET /softenghardskills
+                const softEngHardSkillsRequest = (await (
+                    await fetch(REMOTE_URL + '/softenghardskills')
+                ).json()) as JSONResponseType;
+
+                if (Number(softEngHardSkillsRequest.statusCode) !== 200) {
+                    console.error(softEngHardSkillsRequest.statusCode);
+                } else {
+                    updateSoftEngHardSkills([...softEngHardSkillsRequest.data]);
+                }
+
+                // GET /pentesthardskills
+                const pentestHardSkillsRequest = (await (
+                    await fetch(REMOTE_URL + '/pentesthardskills')
+                ).json()) as JSONResponseType;
+
+                if (Number(pentestHardSkillsRequest.statusCode) !== 200) {
+                    console.error(pentestHardSkillsRequest.statusCode);
+                } else {
+                    updatePentestHardSkills([...pentestHardSkillsRequest.data]);
+                }
+
+                // GET /workxp
+                const workXPRequest = (await (
+                    await fetch(REMOTE_URL + '/workxp')
+                ).json()) as JSONResponseType;
+
+                if (Number(workXPRequest.statusCode) !== 200) {
+                    console.error(workXPRequest.statusCode);
+                } else {
+                    updateWorkXP([...workXPRequest.data]);
+                }
+
+                // GET /idiom
+                const idiomRequest = (await (
+                    await fetch(REMOTE_URL + '/idiom')
+                ).json()) as JSONResponseType;
+
+                if (Number(idiomRequest.statusCode) !== 200) {
+                    console.error(idiomRequest.statusCode);
+                } else {
+                    updateIdiom([...idiomRequest.data]);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        })();
+    }, []);
     return (
         <>
             <Menu />
@@ -23,9 +119,11 @@ export const PortfolioPage: FC = () => {
                     <section className="education mb-5">
                         <h5 className="title fw-bolder">Education</h5>
                         <hr />
-                        {education.map((value, index) => (
+                        {education?.map((value, index) => (
                             <p className="text-normal" key={index}>
-                                {value}
+                                {value.graduated
+                                    ? `Estudou ${value.course} na ${value.school}`
+                                    : `Estudante do ${value.currentemester} de ${value.course} na ${value.school}`}
                             </p>
                         ))}
                     </section>
@@ -33,11 +131,11 @@ export const PortfolioPage: FC = () => {
                         <h5 className="title fw-bolder">Languages and tools</h5>
                         <hr />
                         <ul>
-                            {languageToolsIcons.map((value, index) => (
+                            {languageTools?.map((value, index) => (
                                 <li className="m-2" key={index}>
                                     <img
                                         className="m-2"
-                                        src={value}
+                                        src={value.toolImage}
                                         alt=""
                                         width={96}
                                         height={96}
@@ -50,9 +148,9 @@ export const PortfolioPage: FC = () => {
                         <h5 className="title fw-bolder">Softskills</h5>
                         <hr />
                         <ul>
-                            {softSkills.map((value, index) => (
+                            {softSkillsData?.map((value, index) => (
                                 <li key={index}>
-                                    <p>{value}</p>
+                                    <p>{value.softSkill}</p>
                                 </li>
                             ))}
                         </ul>
@@ -63,9 +161,9 @@ export const PortfolioPage: FC = () => {
                         </h5>
                         <hr />
                         <ul>
-                            {hardSkillsProgramming.map((value, index) => (
+                            {softEngHardSkills?.map((value, index) => (
                                 <li key={index}>
-                                    <p>{value}</p>
+                                    <p>{value.hardSkill}</p>
                                 </li>
                             ))}
                         </ul>
@@ -76,9 +174,9 @@ export const PortfolioPage: FC = () => {
                         </h5>
                         <hr />
                         <ul>
-                            {hardSkillsCyberSec.map((value, index) => (
+                            {pentestHardSkills?.map((value, index) => (
                                 <li key={index}>
-                                    <p>{value}</p>
+                                    <p>{value.hardSkill}</p>
                                 </li>
                             ))}
                         </ul>
@@ -87,7 +185,7 @@ export const PortfolioPage: FC = () => {
                         <h5 className="title fw-bolder">Work Experience</h5>
                         <hr />
                         <ul>
-                            {workExperience.map((value, index) => (
+                            {workXP?.map((value, index) => (
                                 <article key={index}>
                                     <p className="fw-bolder titulo-portfolio">
                                         Company :{' '}
@@ -107,18 +205,39 @@ export const PortfolioPage: FC = () => {
                                             {value.description}.{' '}
                                         </span>
                                     </p>
-                                    <p className="fw-bolder titulo-portfolio">
-                                        Start Date :{' '}
-                                        <span className="fst-italic">
-                                            {value.startDate}.{' '}
-                                        </span>
-                                    </p>
-                                    <p className="fw-bolder titulo-portfolio">
-                                        End Date :{' '}
-                                        <span className="fst-italic">
-                                            {value.endDate}.{' '}
-                                        </span>
-                                    </p>
+                                    <section className="d-flex justify-content-start">
+                                        <p className="fw-bolder titulo-portfolio">
+                                            Start Date:&#160;
+                                        </p>
+
+                                        <p className="fw-normal">
+                                            {' '}
+                                            {new Date(value.startDate).getDay()}
+                                            /
+                                            {new Date(
+                                                value.startDate
+                                            ).getMonth()}
+                                            /
+                                            {new Date(
+                                                value.startDate
+                                            ).getFullYear()}
+                                        </p>
+                                    </section>
+                                    <section className="d-flex justify-content-start">
+                                        <p className="fw-bolder titulo-portfolio">
+                                            End Date:&#160;
+                                        </p>
+
+                                        <p className="fw-normal">
+                                            {' '}
+                                            {new Date(value.endDate).getDay()}/
+                                            {new Date(value.endDate).getMonth()}
+                                            /
+                                            {new Date(
+                                                value.endDate
+                                            ).getFullYear()}
+                                        </p>
+                                    </section>
                                     <hr />
                                 </article>
                             ))}
@@ -129,12 +248,12 @@ export const PortfolioPage: FC = () => {
                         <h5 className="title fw-bolder">Idioms</h5>
                         <hr />
                         <ul>
-                            {idioms.map((value, index) => (
+                            {idiom?.map((value, index) => (
                                 <article key={index}>
                                     <p className="fw-bolder titulo-portfolio">
                                         Idiom :{' '}
                                         <span className="fst-italic">
-                                            {value.idiom}.{' '}
+                                            {value.language}.{' '}
                                         </span>
                                     </p>
                                     <p className="fw-bolder titulo-portfolio">
