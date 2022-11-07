@@ -1,4 +1,21 @@
-.projectInformations{ width:40%;text-align: justify; }
-.projectImage{ width:fit-content;}
-.titulo a,.titulo a:visited{color: #000;}
-.titulo a:hover{text-decoration: underline;}
+.projectInformations {
+  width: 100%;
+  text-align: justify;
+}
+.projectImage {
+  width: fit-content;
+}
+.titulo a,
+.titulo a:visited {
+  color: #000;
+}
+.titulo a:hover {
+  text-decoration: underline;
+}
+.project {
+  width: fit-content;
+  margin: 0 auto;
+}
+.data {
+  min-width: 100%;
+}
