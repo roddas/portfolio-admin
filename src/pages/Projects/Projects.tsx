@@ -11,13 +11,38 @@ const deleteBtn = () => {
   alert('delete');
 };
 const editBtn = () => {
-  alert('edit');
+  // alert('edit');
   const imageElement = document.querySelector('.projectImage');
-  const newForm = document.createElement('form');
-  const newUpload = document.createElement('input');
-  newUpload.type = 'file';
 
-  console.log(imageElement);
+  // Creates the base form
+  const newForm = document.createElement('form');
+  newForm.action = '';
+  newForm.className = 'my-3';
+  newForm.method = 'POST';
+  newForm.enctype = 'multipart/form-data';
+
+  // Creates the div to wrap the element
+  const div = document.createElement('div');
+  div.className = 'mb-3';
+
+  // Creates the input element to upload the image
+  const inputFile = document.createElement('input');
+  inputFile.type = 'file';
+  inputFile.className = 'form-control';
+  inputFile.id = 'formFile';
+  inputFile.required = true;
+
+  // Creates the submit button
+  const inputSubmit = document.createElement('input');
+  inputSubmit.type = 'submit';
+  inputSubmit.className = 'btn btn-primary';
+  inputSubmit.innerText = 'Atualizar';
+
+  // Append the label and input to the wrapper
+  div.appendChild(inputFile);
+  newForm.appendChild(div);
+  newForm.appendChild(inputSubmit);
+  imageElement?.appendChild(newForm);
 };
 
 export const ProjectsPage: FC = () => {
