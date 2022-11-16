@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { CSSProperties, FC, useEffect, useState } from 'react';
 import { Menu } from '../../components/Menu/Menu';
 import { NoData } from '../../components/Misc/NoData';
 import { Footer } from '../../components/Footer/Footer';
@@ -6,6 +6,19 @@ import { Footer } from '../../components/Footer/Footer';
 import './Projects.css';
 import { JSONResponseType, ProjectType } from '../../shared/Types';
 import { REMOTE_URL } from '../../shared/constants';
+
+const deleteBtn = () => {
+  alert('delete');
+};
+const editBtn = () => {
+  alert('edit');
+  const imageElement = document.querySelector('.projectImage');
+  const newForm = document.createElement('form');
+  const newUpload = document.createElement('input');
+  newUpload.type = 'file';
+
+  console.log(imageElement);
+};
 
 export const ProjectsPage: FC = () => {
   const [projects, updateProjects] = useState<Array<ProjectType>>();
@@ -38,11 +51,44 @@ export const ProjectsPage: FC = () => {
                 key={index}
                 className="d-flex project justify-content-center"
               >
-                <div className="options">
-                  <a href="">Eliminar</a>
-                  <p></p>
-                  <a href="">Editar</a>
-                </div>
+                <ul>
+                  <li
+                    className="p-1"
+                    style={{ visibility: 'hidden' } as CSSProperties}
+                  >
+                    <img
+                      onClick={() => {
+                        editBtn();
+                      }}
+                      src="edit.svg"
+                      width={16}
+                      height={16}
+                      alt=""
+                    />
+                  </li>
+                  <li className="p-1">
+                    <img
+                      onClick={() => {
+                        editBtn();
+                      }}
+                      src="edit.svg"
+                      width={16}
+                      height={16}
+                      alt=""
+                    />
+                  </li>
+                  <li className="p-1">
+                    <img
+                      onClick={() => {
+                        deleteBtn();
+                      }}
+                      src="delete.svg"
+                      width={16}
+                      height={16}
+                      alt=""
+                    />
+                  </li>
+                </ul>
                 <div className="data d-flex justify-content-center mb-3'">
                   <section className="projectImage justify-content-end">
                     <img src={value.image} width={256} height={256} alt="" />
