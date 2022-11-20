@@ -1,4 +1,4 @@
-# Front-End server of portfolio
+# Admin front-end server of portfolio
 ## About
 This is the admin front-end server of my pesonal portfolio.
 
