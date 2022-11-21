@@ -2,6 +2,21 @@
 ## About
 This is the admin front-end server of my pesonal portfolio.
 
+## How to use
+In order to use, open the terminal and type:
+
+```
+yarn global add ts-node-dev
+yarn install
+yarn start
+```
+or if you1're using npm, type:
+```
+npm i -g ts-node-dev
+npm i
+npm start
+```
+
 ## Technologies and languages
 
 ![eslint](https://user-images.githubusercontent.com/9947506/197403598-7b8d89fc-200f-4305-a4ab-8d2ff9cd2e0e.svg)
