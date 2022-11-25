@@ -39,6 +39,7 @@ export const ProjectsPage: FC = () => {
     };
     getProjects();
   }, []);
+
   if (projects) {
     return (
       <>
@@ -95,23 +96,24 @@ export const ProjectsPage: FC = () => {
                   </section>
                   <section className="projectInformations align-items-center p-3">
                     <p className="fw-bolder titulo">{value.title}</p>
-                    <p className="fst-normal">{value.projectDescription}</p>
+                    <p className="fst-normal descricao">
+                      {value.projectDescription}
+                    </p>
                     <p className="fw-bolder titulo">
                       Estado :{' '}
-                      <span className="fst-italic">{value.state}. </span>
+                      <span className="fst-italic estado">{value.state}. </span>
                     </p>
                     <span className="fw-bolder titulo">
                       Link :{' '}
                       <a
                         target="_blank"
                         href={value.link}
-                        className="fst-italic fw-lighter"
+                        className="fst-italic fw-lighter link"
                         rel="noreferrer"
                       >
                         Clique aqui{' '}
                       </a>
                     </span>
-                    <div>{isClicked ? 'Clicado' : 'não'}</div>
                   </section>
                 </div>
               </div>
@@ -130,3 +132,40 @@ export const ProjectsPage: FC = () => {
     </>
   );
 };
+
+/*
+const editBtn = () => {
+  // alert('edit');
+  const imageElement = document.querySelector('.projectImage');
+  // Creates the base form
+  const newForm = document.createElement('form');
+  newForm.action = '';
+  newForm.className = 'my-3';
+  newForm.method = 'POST';
+  newForm.enctype = 'multipart/form-data';
+
+  // Creates the div to wrap the element
+  const div = document.createElement('div');
+  div.className = 'mb-3';
+
+  // Creates the input element to upload the image
+  const inputFile = document.createElement('input');
+  inputFile.type = 'file';
+  inputFile.className = 'form-control';
+  inputFile.id = 'formFile';
+  inputFile.required = true;
+
+  // Creates the submit button
+  const inputSubmit = document.createElement('input');
+  inputSubmit.type = 'submit';
+  inputSubmit.className = 'btn btn-primary';
+  inputSubmit.innerText = 'Atualizar';
+
+  // Append the label and input to the wrapper
+  div.appendChild(inputFile);
+  newForm.appendChild(div);
+  newForm.appendChild(inputSubmit);
+  imageElement?.appendChild(newForm);
+};
+
+*/
