@@ -17,7 +17,47 @@ export const ProjectsPage: FC = () => {
 
   const editBtn = () => {
     const editImage = document.querySelector('.editBtn');
-    editImage?.setAttribute('src', isClicked ? 'edit.svg' : 'x.svg');
+    if (!isClicked) {
+      editImage?.setAttribute('src', 'x.svg');
+
+      const imageElement = document.querySelector('.projectImage');
+
+      // Creates the base form
+      const newForm = document.createElement('form');
+      newForm.action = '';
+      newForm.className = 'my-3 editForm';
+      newForm.method = 'POST';
+      newForm.enctype = 'multipart/form-data';
+
+      // Creates the div to wrap the element
+      const div = document.createElement('div');
+      div.className = 'mb-3';
+
+      // Creates the input element to upload the image
+      const inputFile = document.createElement('input');
+      inputFile.type = 'file';
+      inputFile.className = 'form-control';
+      inputFile.id = 'formFile';
+      inputFile.required = true;
+
+      // Creates the submit button
+      const inputSubmit = document.createElement('input');
+      inputSubmit.type = 'submit';
+      inputSubmit.className = 'btn btn-primary';
+      inputSubmit.innerText = 'Atualizar';
+
+      // Append the label and input to the wrapper
+      div.appendChild(inputFile);
+      newForm.appendChild(div);
+      newForm.appendChild(inputSubmit);
+      imageElement?.appendChild(newForm);
+    } else {
+      editImage?.setAttribute('src', 'edit.svg');
+      const editForm = document.querySelector('.editForm');
+      if (editForm) {
+        editForm.remove();
+      }
+    }
     setClicked(!isClicked);
   };
 
