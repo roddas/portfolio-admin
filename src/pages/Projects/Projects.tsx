@@ -1,11 +1,10 @@
-import { CSSProperties, FC, useEffect, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 import { MdDeleteForever, MdOutlineEdit } from 'react-icons/md';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { Menu } from '../../components/Menu/Menu';
 import { NoData } from '../../components/Misc/NoData';
 import { Footer } from '../../components/Footer/Footer';
 import { EditForm } from '../../components/shared/EditForm/EditForm';
-
 import './Projects.css';
 import { JSONResponseType, ProjectType } from '../../shared/Types';
 import { REMOTE_URL } from '../../shared/constants';
@@ -17,8 +16,7 @@ const deleteBtn = () => {
 export const ProjectsPage = () => {
   const [projects, updateProjects] = useState<Array<ProjectType>>();
   const [isClicked, setClicked] = useState(false);
-
-  const editBtn = () => {
+  const toggleButton = () => {
     setClicked(!isClicked);
   };
 
@@ -48,72 +46,58 @@ export const ProjectsPage = () => {
         <div className="container-fluid py-5">
           {projects.map((value, index) => {
             return (
-              <>
-                <div
-                  key={index}
-                  className="d-flex project justify-content-center"
-                >
-                  <ul>
-                    <li
-                      className="p-1"
-                      style={{ visibility: 'hidden' } as CSSProperties}
-                    ></li>
-                    <li className="p-1">
-                      {isClicked === false ? (
-                        <MdOutlineEdit
-                          onClick={() => {
-                            editBtn();
-                          }}
-                        />
-                      ) : (
-                        <AiFillCloseCircle
-                          onClick={() => {
-                            editBtn();
-                          }}
-                        />
-                      )}
-                    </li>
-                    <li className="p-1">
-                      <MdDeleteForever
-                        onClick={() => {
-                          deleteBtn();
-                        }}
-                      />
-                    </li>
-                  </ul>
-                  <div className="data d-flex justify-content-center mb-3'">
-                    <section className="projectImage justify-content-end">
-                      <img src={value.image} width={256} height={256} alt="" />
-                    </section>
-                    <section className="projectInformations align-items-center p-3">
-                      <p className="fw-bolder titulo">{value.title}</p>
-                      <p className="fst-normal descricao">
-                        {value.projectDescription}
-                      </p>
-                      <p className="fw-bolder titulo">
-                        Estado :{' '}
-                        <span className="fst-italic estado">
-                          {value.state}.{' '}
-                        </span>
-                      </p>
-                      <span className="fw-bolder titulo">
-                        Link :{' '}
-                        <a
-                          target="_blank"
-                          href={value.link}
-                          className="fst-italic fw-lighter link"
-                          rel="noreferrer"
-                        >
-                          Clique aqui{' '}
-                        </a>
-                      </span>
-                    </section>
-                  </div>
+              <div
+                key={index}
+                className="d-flex project justify-content-center"
+              >
+                <ul>
+                  <li
+                    style={{ visibility: 'hidden' } as CSSProperties}
+                    className="p-1"
+                  >
+                    <MdOutlineEdit />
+                  </li>
+                  <li className="p-1">
+                    {!isClicked ? (
+                      <MdOutlineEdit onClick={toggleButton} />
+                    ) : (
+                      <AiFillCloseCircle onClick={toggleButton} />
+                    )}
+                  </li>
+                  <li className="p-1">
+                    <MdDeleteForever onClick={deleteBtn} />
+                  </li>
+                </ul>
+                <div className="data d-flex justify-content-center mb-3'">
+                  <section className="projectImage justify-content-end">
+                    <img src={value.image} width={256} height={256} alt="" />
+                  </section>
+                  <section className="projectInformations align-items-center p-3">
+                    <p className="fw-bolder titulo">{value.title}</p>
+                    <p className="fst-normal descricao">
+                      {value.projectDescription}
+                    </p>
+                    <p className="fw-bolder titulo">
+                      Estado :{' '}
+                      <span className="fst-italic estado">{value.state}. </span>
+                    </p>
+                    <span className="fw-bolder titulo">
+                      Link :{' '}
+                      <a
+                        target="_blank"
+                        href={value.link}
+                        className="fst-italic fw-lighter link"
+                        rel="noreferrer"
+                      >
+                        Clique aqui{' '}
+                      </a>
+                    </span>
+                  </section>
                 </div>
-                <EditForm />
-              </>
+              </div>
             );
           })}
+          <EditForm isVisible={isClicked} />
         </div>
         <Footer />
       </>

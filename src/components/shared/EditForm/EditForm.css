@@ -1,0 +1,9 @@
+.form {
+  width: 10%;
+}
+.active {
+  display: block;
+}
+.hidden {
+  display: none;
+}
