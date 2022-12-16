@@ -16,8 +16,13 @@ const deleteBtn = () => {
 export const ProjectsPage = () => {
   const [projects, updateProjects] = useState<Array<ProjectType>>();
   const [isClicked, setClicked] = useState(false);
+  const [isEdited, setEdited] = useState(false);
+  const [isVisible, setVisible] = useState(true);
+
   const toggleButton = () => {
     setClicked(!isClicked);
+    setEdited(!isEdited);
+    setVisible(!isVisible);
   };
 
   useEffect(() => {
@@ -48,15 +53,9 @@ export const ProjectsPage = () => {
             return (
               <div
                 key={index}
-                className="d-flex project justify-content-center"
+                className="d-flex project justify-content-between"
               >
                 <ul>
-                  <li
-                    style={{ visibility: 'hidden' } as CSSProperties}
-                    className="p-1"
-                  >
-                    <MdOutlineEdit />
-                  </li>
                   <li className="p-1">
                     {!isClicked ? (
                       <MdOutlineEdit onClick={toggleButton} />
@@ -68,11 +67,15 @@ export const ProjectsPage = () => {
                     <MdDeleteForever onClick={deleteBtn} />
                   </li>
                 </ul>
-                <div className="data d-flex justify-content-center mb-3'">
-                  <section className="projectImage justify-content-end">
-                    <img src={value.image} width={256} height={256} alt="" />
-                  </section>
-                  <section className="projectInformations align-items-center p-3">
+                <img
+                  src={value.image}
+                  width={256}
+                  height={256}
+                  alt=""
+                  className="image mx-2"
+                />
+                <section className="project_information">
+                  <section className={isVisible ? 'active' : 'hidden'}>
                     <p className="fw-bolder titulo">{value.title}</p>
                     <p className="fst-normal descricao">
                       {value.projectDescription}
@@ -93,11 +96,63 @@ export const ProjectsPage = () => {
                       </a>
                     </span>
                   </section>
-                </div>
+                  <section className={isVisible ? 'hidden' : 'true'}>
+                    <input
+                      type="text"
+                      name="titulo"
+                      value={value.title}
+                      id="titulo"
+                      required
+                    />
+                    <textarea
+                      name="descricao"
+                      value={value.projectDescription}
+                      id="descricao"
+                      className="form-control .my-3"
+                      required
+                    ></textarea>
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="flexRadioDefault1"
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexRadioDefault1"
+                      >
+                        Em andamento
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="flexRadioDefault2"
+                        checked
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="flexRadioDefault2"
+                      >
+                        Finalizado
+                      </label>
+                    </div>
+                    <input
+                      type="text"
+                      name="link"
+                      value={value.link}
+                      id="link"
+                      required
+                    />
+                    <EditForm isVisible={isClicked} />
+                  </section>
+                </section>
               </div>
             );
           })}
-          <EditForm isVisible={isClicked} />
         </div>
         <Footer />
       </>
@@ -111,40 +166,3 @@ export const ProjectsPage = () => {
     </>
   );
 };
-
-/*
-const editBtn = () => {
-  // alert('edit');
-  const imageElement = document.querySelector('.projectImage');
-  // Creates the base form
-  const newForm = document.createElement('form');
-  newForm.action = '';
-  newForm.className = 'my-3';
-  newForm.method = 'POST';
-  newForm.enctype = 'multipart/form-data';
-
-  // Creates the div to wrap the element
-  const div = document.createElement('div');
-  div.className = 'mb-3';
-
-  // Creates the input element to upload the image
-  const inputFile = document.createElement('input');
-  inputFile.type = 'file';
-  inputFile.className = 'form-control';
-  inputFile.id = 'formFile';
-  inputFile.required = true;
-
-  // Creates the submit button
-  const inputSubmit = document.createElement('input');
-  inputSubmit.type = 'submit';
-  inputSubmit.className = 'btn btn-primary';
-  inputSubmit.innerText = 'Atualizar';
-
-  // Append the label and input to the wrapper
-  div.appendChild(inputFile);
-  newForm.appendChild(div);
-  newForm.appendChild(inputSubmit);
-  imageElement?.appendChild(newForm);
-};
-
-*/
