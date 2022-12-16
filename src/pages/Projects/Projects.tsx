@@ -4,7 +4,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { Menu } from '../../components/Menu/Menu';
 import { NoData } from '../../components/Misc/NoData';
 import { Footer } from '../../components/Footer/Footer';
-import { EditForm } from '../../components/shared/EditForm/EditForm';
+import { EditForm } from '../../shared/EditForm/EditForm';
 import './Projects.css';
 import { JSONResponseType, ProjectType } from '../../shared/Types';
 import { REMOTE_URL } from '../../shared/constants';
@@ -56,6 +56,7 @@ export const ProjectsPage = () => {
                 className="d-flex project justify-content-between"
               >
                 <ul>
+                  <li style={{ visibility: 'hidden' }}>fsfsdf</li>
                   <li className="p-1">
                     {!isClicked ? (
                       <MdOutlineEdit onClick={toggleButton} />
@@ -96,59 +97,7 @@ export const ProjectsPage = () => {
                       </a>
                     </span>
                   </section>
-                  <section className={isVisible ? 'hidden' : 'true'}>
-                    <input
-                      type="text"
-                      name="titulo"
-                      value={value.title}
-                      id="titulo"
-                      required
-                    />
-                    <textarea
-                      name="descricao"
-                      value={value.projectDescription}
-                      id="descricao"
-                      className="form-control .my-3"
-                      required
-                    ></textarea>
-                    <div className="form-check">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="flexRadioDefault"
-                        id="flexRadioDefault1"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="flexRadioDefault1"
-                      >
-                        Em andamento
-                      </label>
-                    </div>
-                    <div className="form-check">
-                      <input
-                        className="form-check-input"
-                        type="radio"
-                        name="flexRadioDefault"
-                        id="flexRadioDefault2"
-                        checked
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="flexRadioDefault2"
-                      >
-                        Finalizado
-                      </label>
-                    </div>
-                    <input
-                      type="text"
-                      name="link"
-                      value={value.link}
-                      id="link"
-                      required
-                    />
-                    <EditForm isVisible={isClicked} />
-                  </section>
+                  <EditForm isVisible={!isClicked} project={value} />
                 </section>
               </div>
             );
