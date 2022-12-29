@@ -58,11 +58,10 @@ export const ProjectsPage = () => {
                 <ul>
                   <li style={{ visibility: 'hidden' }}>fsfsdf</li>
                   <li className="p-1">
-                    {!isClicked ? (
-                      <MdOutlineEdit onClick={toggleButton} />
-                    ) : (
-                      <AiFillCloseCircle onClick={toggleButton} />
-                    )}
+                    <MdOutlineEdit
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    />
                   </li>
                   <li className="p-1">
                     <MdDeleteForever onClick={deleteBtn} />
@@ -97,7 +96,7 @@ export const ProjectsPage = () => {
                       </a>
                     </span>
                   </section>
-                  <EditForm isVisible={!isClicked} project={value} />
+                  <EditForm project={value} />
                 </section>
               </div>
             );
