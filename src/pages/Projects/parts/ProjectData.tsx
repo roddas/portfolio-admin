@@ -1,6 +1,7 @@
 import { MdDeleteForever, MdOutlineEdit } from 'react-icons/md';
 import { ProjectType } from '../../../shared/Types';
 import { EditForm } from './EditForm';
+import '../Projects.css';
 
 type ProjectDataType = {
   data: Array<ProjectType>;

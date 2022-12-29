@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Menu } from '../../components/Menu/Menu';
 import { LoadingData } from '../../components/Misc/LoadingData';
 import { Footer } from '../../components/Footer/Footer';
-import './Projects.css';
 import { JSONResponseType, ProjectType } from '../../shared/Types';
 import { REMOTE_URL } from '../../shared/constants';
 import { ProjectData } from './parts/ProjectData';
