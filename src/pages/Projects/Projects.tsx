@@ -1,6 +1,5 @@
-import { CSSProperties, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MdDeleteForever, MdOutlineEdit } from 'react-icons/md';
-import { AiFillCloseCircle } from 'react-icons/ai';
 import { Menu } from '../../components/Menu/Menu';
 import { NoData } from '../../components/Misc/NoData';
 import { Footer } from '../../components/Footer/Footer';
@@ -15,15 +14,6 @@ const deleteBtn = () => {
 
 export const ProjectsPage = () => {
   const [projects, updateProjects] = useState<Array<ProjectType>>();
-  const [isClicked, setClicked] = useState(false);
-  const [isEdited, setEdited] = useState(false);
-  const [isVisible, setVisible] = useState(true);
-
-  const toggleButton = () => {
-    setClicked(!isClicked);
-    setEdited(!isEdited);
-    setVisible(!isVisible);
-  };
 
   useEffect(() => {
     const getProjects = async () => {
@@ -75,7 +65,7 @@ export const ProjectsPage = () => {
                   className="image mx-2"
                 />
                 <section className="project_information">
-                  <section className={isVisible ? 'active' : 'hidden'}>
+                  <section>
                     <p className="fw-bolder titulo">{value.title}</p>
                     <p className="fst-normal descricao">
                       {value.projectDescription}
