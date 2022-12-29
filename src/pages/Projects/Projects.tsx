@@ -29,19 +29,10 @@ export const ProjectsPage = () => {
     getProjects();
   }, []);
 
-  if (projects) {
-    return (
-      <>
-        <Menu />
-        <ProjectData data={projects} />
-        <Footer />
-      </>
-    );
-  }
   return (
     <>
       <Menu />
-      <LoadingData />
+      {projects ? <ProjectData data={projects} /> : <LoadingData />}
       <Footer />
     </>
   );
