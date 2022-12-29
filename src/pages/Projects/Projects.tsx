@@ -4,7 +4,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { Menu } from '../../components/Menu/Menu';
 import { NoData } from '../../components/Misc/NoData';
 import { Footer } from '../../components/Footer/Footer';
-import { EditForm } from '../../shared/EditForm/EditForm';
+import { EditForm } from './EditForm/EditForm';
 import './Projects.css';
 import { JSONResponseType, ProjectType } from '../../shared/Types';
 import { REMOTE_URL } from '../../shared/constants';

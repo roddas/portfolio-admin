@@ -1,5 +1,5 @@
 import './EditForm.css';
-import { ProjectType } from '../Types';
+import { ProjectType } from '../../../shared/Types';
 type EditFormProps = {
   isVisible: boolean;
   project: ProjectType;
