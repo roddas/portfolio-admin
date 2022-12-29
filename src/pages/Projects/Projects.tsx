@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { MdDeleteForever, MdOutlineEdit } from 'react-icons/md';
 import { Menu } from '../../components/Menu/Menu';
-import { NoData } from '../../components/Misc/NoData';
+import { LoadingData } from '../../components/Misc/LoadingData';
 import { Footer } from '../../components/Footer/Footer';
-import { EditForm } from './EditForm/EditForm';
+import { EditForm } from './parts/EditForm';
 import './Projects.css';
 import { JSONResponseType, ProjectType } from '../../shared/Types';
 import { REMOTE_URL } from '../../shared/constants';
@@ -99,7 +99,7 @@ export const ProjectsPage = () => {
   return (
     <>
       <Menu />
-      <NoData />
+      <LoadingData />
       <Footer />
     </>
   );

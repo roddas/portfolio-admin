@@ -89,11 +89,6 @@ export const EditForm = (params: EditFormProps) => {
                   id="image"
                   required
                 />
-                <input
-                  type="submit"
-                  className="btn mt-3 btn-primary"
-                  value="Atualizar"
-                />
               </section>
             </div>
             <div className="modal-footer">
@@ -102,10 +97,10 @@ export const EditForm = (params: EditFormProps) => {
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
-                Close
+                Fechar
               </button>
               <button type="button" className="btn btn-primary">
-                Save changes
+                Atualizar
               </button>
             </div>
           </div>
