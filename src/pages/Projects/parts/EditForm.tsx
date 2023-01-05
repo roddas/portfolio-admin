@@ -25,7 +25,7 @@ export const EditForm = (params: EditFormProps) => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Modal title
+                Editar o projeto
               </h5>
               <button
                 type="button"
@@ -103,13 +103,6 @@ export const EditForm = (params: EditFormProps) => {
                 </section>
               </div>
               <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Fechar
-                </button>
                 <button type="submit" className="btn btn-primary">
                   Atualizar
                 </button>
