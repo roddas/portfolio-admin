@@ -1,17 +1,26 @@
+import { FormEvent } from 'react';
 import './EditForm.css';
 import { ProjectType } from '../../../shared/Types';
+import { PROJECTS_URL } from '../../../shared/constants';
+import { updateData } from '../../../utils/forms/fetch';
 
 type EditFormProps = {
   project: ProjectType;
 };
 
-const handleSubmit = () => {
-  alert('Oskay');
+const handleSubmit = async (e: FormEvent) => {
+  e.preventDefault();
+  const form = document.querySelector('form') as HTMLElement;
+  try {
+    const response = await updateData(form);
+    console.log(response);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const EditForm = (params: EditFormProps) => {
-  const { title, projectDescription, link } = params.project;
-  // const elementClassName = `form mb-3 ${isVisible ? 'active' : 'hidden'}`;
+  const { title, projectDescription, link, id } = params.project;
   return (
     <>
       <div
@@ -35,25 +44,24 @@ export const EditForm = (params: EditFormProps) => {
               ></button>
             </div>
             <form
-              action="#"
-              onSubmit={handleSubmit}
+              action={PROJECTS_URL}
               encType="multipart/form-data"
-              method="post"
+              method="POST"
             >
               <div className="modal-body">
                 <section>
                   <input
                     className="form-control mb-1"
                     type="text"
-                    name="titulo"
+                    name="title"
                     value={title}
-                    id="titulo"
+                    id="title"
                     required
                   />
                   <textarea
-                    name="descricao"
+                    name="projectDescription"
                     value={projectDescription}
-                    id="descricao"
+                    id="projectDescription"
                     className="form-control mb-1"
                     required
                   ></textarea>
@@ -61,7 +69,7 @@ export const EditForm = (params: EditFormProps) => {
                     <input
                       className="form-check-input"
                       type="radio"
-                      name="flexRadioDefault"
+                      name="state"
                       id="flexRadioDefault1"
                     />
                     <label
@@ -75,7 +83,7 @@ export const EditForm = (params: EditFormProps) => {
                     <input
                       className="form-check-input"
                       type="radio"
-                      name="flexRadioDefault"
+                      name="state"
                       id="flexRadioDefault2"
                     />
                     <label
@@ -100,10 +108,15 @@ export const EditForm = (params: EditFormProps) => {
                     id="image"
                     required
                   />
+                  <input type="hidden" name="id" value={id} />
                 </section>
               </div>
               <div className="modal-footer">
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="submit"
+                  onClick={handleSubmit}
+                  className="btn btn-primary"
+                >
                   Atualizar
                 </button>
               </div>
