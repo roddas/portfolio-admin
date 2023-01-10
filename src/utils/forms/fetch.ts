@@ -1,23 +1,14 @@
-type FormDataObject = {
-  [key in string]: FormDataEntryValue;
-};
+import fs from 'fs';
 
 export const updateData = async (form: HTMLElement) => {
   const URL = form?.getAttribute('action') as string;
   const formData = new FormData(form as HTMLFormElement);
-  const formDataObj: FormDataObject = {};
 
-  formData.forEach((value: FormDataEntryValue, key: string) => {
-    formDataObj[key] = value;
-  });
-  console.log(formDataObj);
-  const response = await fetch(URL, {
+  const fetchOptions: RequestInit = {
     method: 'PUT',
-    body: JSON.stringify(formDataObj),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
+    body: formData
+  };
+  const response = await fetch(URL, fetchOptions);
 
   return await response.json();
 };
